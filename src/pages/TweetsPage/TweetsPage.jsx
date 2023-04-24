@@ -1,5 +1,5 @@
 const HomePage = () => {
-    return <div className={style.box}>
+    return <div >
         HomePage
     </div>
 }
