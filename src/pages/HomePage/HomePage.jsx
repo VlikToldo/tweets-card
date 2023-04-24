@@ -1,4 +1,4 @@
-import style from './home-page.module.scss';
+import style from './home-page.module.css';
 
 const HomePage = () => {
     return <div className={style.box}>
