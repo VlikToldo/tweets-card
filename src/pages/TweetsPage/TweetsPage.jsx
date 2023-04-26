@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
-import {useLocation, Link} from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 
 import UserCard from '../../components/UserCard/UserCard';
 import { getUser, updateFollowers } from '../../shared/services/api';
 import ButtonLoad from '../../shared/Button/ButtonNuv';
-import  ButtonNuv from '../../shared/Button/ButtonNuv';
+import ButtonNuv from '../../shared/Button/ButtonNuv';
 
 import style from './tweets-page.module.scss';
 
@@ -15,7 +15,7 @@ const HomePage = () => {
   const [page, setPage] = useState(1);
   const [loadButton, setLoadButton] = useState(false);
   const [loading, setLoading] = useState(false);
-  
+
   const location = useLocation();
   const backLink = useRef(location.state?.from ?? '/');
 
@@ -24,24 +24,25 @@ const HomePage = () => {
       try {
         setLoading(true);
         const data = await getUser(page);
-        setShowBtn(data.length===3)
+        setShowBtn(data.length === 3);
         setItems(prevItems => {
           if (loadButton) {
-            return [...prevItems, ...data]
-        }
-          return [...data]})
+            return [...prevItems, ...data];
+          }
+          return [...data];
+        });
       } catch (error) {
         console.log(error.message);
-      }finally {
+      } finally {
         setLoading(false);
       }
     };
     fetchUsers();
-  }, [page,loadButton]);
+  }, [page, loadButton]);
 
   const addFollower = id => {
     const user = items.find(user => user.id === id);
-    const newUser = { ...user, followers: user.followers + 1};
+    const newUser = { ...user, followers: user.followers + 1 };
 
     const followUser = async () => {
       try {
@@ -60,14 +61,14 @@ const HomePage = () => {
 
   const removeFollower = id => {
     const user = items.find(user => user.id === id);
-    const newUser = { ...user, followers: user.followers - 1};
+    const newUser = { ...user, followers: user.followers - 1 };
 
     const followUser = async () => {
       try {
         await updateFollowers(newUser);
         setItems(prevUsers =>
           prevUsers.map(user =>
-            user.id === id ? { ...user, followers: user.followers - 1} : user
+            user.id === id ? { ...user, followers: user.followers - 1 } : user
           )
         );
       } catch (error) {
@@ -99,7 +100,8 @@ const HomePage = () => {
         <ButtonNuv>Back</ButtonNuv>
       </Link>
       <ul className={style.cardList}>{element}</ul>
-      {(showBtn && <ButtonLoad onClick={loadMore} >Load more</ButtonLoad>) || (!loading && <p>No more users</p>)}
+      {(showBtn && <ButtonLoad onClick={loadMore}>Load more</ButtonLoad>) ||
+        (!loading && <p>No more users</p>)}
     </>
   );
 };

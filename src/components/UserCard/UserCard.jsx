@@ -5,8 +5,7 @@ import Button from '../../shared/Button/Button';
 
 import style from './user-card.module.scss';
 
-const UserCard = ({ followers, tweets, id,  addFollower, removeFollower}) => {
-  
+const UserCard = ({ followers, tweets, id, addFollower, removeFollower }) => {
   const [subscription, setSubscription] = useState(() => {
     const subscription = JSON.parse(localStorage.getItem('subscription'));
     return subscription ? subscription : false;
@@ -16,7 +15,7 @@ const UserCard = ({ followers, tweets, id,  addFollower, removeFollower}) => {
     localStorage.setItem('subscription', JSON.stringify(subscription));
   }, [subscription]);
 
-  const handleClick = () =>{
+  const handleClick = () => {
     if (subscription) {
       removeFollower(id);
       setSubscription(false);
@@ -24,8 +23,16 @@ const UserCard = ({ followers, tweets, id,  addFollower, removeFollower}) => {
     }
     addFollower(id);
     setSubscription(true);
-  }
+  };
 
+  const formattedNumber = number => {
+    let formattedNumber = number.toLocaleString('en-US', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    });
+    formattedNumber = formattedNumber.replace(/,/g, ',');
+    return formattedNumber;
+  };
 
   return (
     <li className={style.tweetsCard}>
@@ -40,10 +47,14 @@ const UserCard = ({ followers, tweets, id,  addFollower, removeFollower}) => {
       <div className={style.tweetsBox}>
         <div className={style.tweetsBoxQuantity}>
           <p className={style.tweetsQuantity}>Tweets {tweets}</p>
-          <p className={style.tweetsQuantity}>followers {followers}</p>
+          <p className={style.tweetsQuantity}>
+            followers {formattedNumber(followers)}
+          </p>
         </div>
 
-        <Button key={id} onClick={handleClick} className={subscription}>{(subscription && 'folowings') || (!subscription && 'follow')}</Button>
+        <Button key={id} onClick={handleClick} className={subscription}>
+          {(subscription && 'following') || (!subscription && 'follow')}
+        </Button>
       </div>
     </li>
   );
