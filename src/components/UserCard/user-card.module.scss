@@ -1,0 +1,65 @@
+.tweetsCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  height: 460px;
+  background-image: url('./images/boy.png'), url('./images/rectangle.png'),
+    linear-gradient(114.99deg, #471ca9 -0.99%, #5736a3 54.28%, #4b2a99 78.99%);
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: -2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23);
+  border-radius: 20px;
+}
+
+.logo{
+  position: absolute;
+  top:20px;
+  left: 20px;
+
+}
+
+.imgBox {
+  width: inherit;
+  height: 230px;
+}
+
+.logoImg {
+  position: relative;
+  z-index: 20;
+  width: 308px;
+  height: 168px;
+  top: 28px;
+  left: 36px;
+}
+
+.tweetsBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 62px;
+}
+
+.tweetsBoxQuantity{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 26px;
+}
+
+.tweetsQuantity {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  margin: 0;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+  color: #ebd8ff;
+
+  &:not(:last-child){
+    margin-bottom: 20px;
+  }
+}
