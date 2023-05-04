@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { nanoid } from 'nanoid';
 
 import UserCard from '../../components/UserCard/UserCard';
-import { getUser, updateFollowers } from '../../shared/services/api';
+import { getUsers, updateFollowers } from '../../shared/services/api';
 import ButtonLoad from '../../shared/Button/ButtonNuv';
 import ButtonNuv from '../../shared/Button/ButtonNuv';
 
@@ -23,7 +23,7 @@ const HomePage = () => {
     const fetchUsers = async () => {
       try {
         setLoading(true);
-        const data = await getUser(page);
+        const data = await getUsers(page);
         setShowBtn(data.length === 3);
         setItems(prevItems => {
           if (loadButton) {
@@ -42,18 +42,18 @@ const HomePage = () => {
 
   const addFollower = id => {
     const user = items.find(user => user.id === id);
-    const newUser = { ...user, followers: user.followers + 1 };
+    const newUser = { ...user, followers: user.followers + 1, subscription: true };
 
     const followUser = async () => {
       try {
         await updateFollowers(newUser);
         setItems(prevUsers =>
           prevUsers.map(user =>
-            user.id === id ? { ...user, followers: user.followers + 1 } : user
-          )
+           user.id === id ? { ...user, followers: user.followers + 1, subscription: true } : user
+           )
         );
       } catch (error) {
-        console.log(error.message);
+        alert(error.message);
       }
     };
     followUser();
@@ -61,18 +61,18 @@ const HomePage = () => {
 
   const removeFollower = id => {
     const user = items.find(user => user.id === id);
-    const newUser = { ...user, followers: user.followers - 1 };
+    const newUser = { ...user, followers: user.followers - 1, subscription: false };
 
     const followUser = async () => {
       try {
         await updateFollowers(newUser);
         setItems(prevUsers =>
           prevUsers.map(user =>
-            user.id === id ? { ...user, followers: user.followers - 1 } : user
+            user.id === id ? { ...user, followers: user.followers - 1, subscription: false } : user
           )
         );
       } catch (error) {
-        console.log(error.message);
+        alert(error.message);
       }
     };
     followUser();

@@ -7,7 +7,7 @@ const instance = axios.create({
   },
 });
 
-export const getUser = async (page = 1) => {
+export const getUsers = async (page = 1) => {
   const { data } = await instance.get('/', {
     params: {
       page,
@@ -17,7 +17,7 @@ export const getUser = async (page = 1) => {
 };
 
 export const updateFollowers = async user => {
-  const { data } = await instance.put(`/${user.id}`, user);
+  const {data}  = await instance.put(`/${user.id}`, user);
   console.log(data);
   return data;
 };

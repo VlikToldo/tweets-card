@@ -1,28 +1,17 @@
 import { ReactComponent as Logo } from './images/logo.svg';
-import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import Button from '../../shared/Button/Button';
 
 import style from './user-card.module.scss';
 
-const UserCard = ({ followers, tweets, id, addFollower, removeFollower }) => {
-  const [subscription, setSubscription] = useState(() => {
-    const subscription = JSON.parse(localStorage.getItem('subscription'));
-    return subscription ? subscription : false;
-  });
-
-  useEffect(() => {
-    localStorage.setItem('subscription', JSON.stringify(subscription));
-  }, [subscription]);
-
+const UserCard = ({followers, tweets, subscription, id, addFollower, removeFollower}) => {
   const handleClick = () => {
     if (subscription) {
       removeFollower(id);
-      setSubscription(false);
       return;
     }
     addFollower(id);
-    setSubscription(true);
   };
 
   const formattedNumber = number => {
@@ -52,7 +41,7 @@ const UserCard = ({ followers, tweets, id, addFollower, removeFollower }) => {
           </p>
         </div>
 
-        <Button key={id} onClick={handleClick} className={subscription}>
+        <Button key={id} onClick={handleClick} subscription={subscription}>
           {(subscription && 'following') || (!subscription && 'follow')}
         </Button>
       </div>
@@ -61,3 +50,12 @@ const UserCard = ({ followers, tweets, id, addFollower, removeFollower }) => {
 };
 
 export default UserCard;
+
+UserCard.propTypes ={
+  followers: PropTypes.number.isRequired,
+  tweets: PropTypes.number.isRequired,
+  subscription: PropTypes.bool.isRequired,
+  id: PropTypes.string.isRequired,
+  addFollower: PropTypes.func.isRequired,
+  removeFollower: PropTypes.func.isRequired
+}
