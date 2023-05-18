@@ -4,12 +4,12 @@ import { nanoid } from 'nanoid';
 
 import UserCard from '../../components/UserCard/UserCard';
 import { getUsers, updateFollowers } from '../../shared/services/api';
-import ButtonLoad from '../../shared/Button/ButtonNuv';
-import ButtonNuv from '../../shared/Button/ButtonNuv';
+import ButtonLoad from '../../components/Button/ButtonNuv';
+import ButtonNuv from '../../components/Button/ButtonNuv';
 
 import style from './tweets-page.module.scss';
 
-const HomePage = () => {
+const TweetsPage = () => {
   const [items, setItems] = useState([]);
   const [showBtn, setShowBtn] = useState(false);
   const [page, setPage] = useState(1);
@@ -106,4 +106,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default TweetsPage;

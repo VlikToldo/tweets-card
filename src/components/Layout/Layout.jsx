@@ -8,13 +8,19 @@ const Layout = () => {
   return (
     <>
       <header className={style.header}>
-        <NavLink className={style.navLink} to="/">Home </NavLink> |
-        <NavLink className={style.navLink} to='/tweets'> Tweets</NavLink>
+        <div className={style.container} >
+          <nav>
+            <NavLink className={style.navLink} to="/">Home </NavLink> |
+            <NavLink className={style.navLink} to='/tweets'> Tweets</NavLink>
+          </nav>
+        </div>
       </header>
       <main className={style.main}>
-        <Suspense fallback={<p>...Loading</p>}>
-          <Outlet />
-        </Suspense>
+        <div className={style.container}>
+          <Suspense fallback={<p>...Loading</p>}>
+            <Outlet />
+          </Suspense>
+        </div>
       </main>
     </>
   );

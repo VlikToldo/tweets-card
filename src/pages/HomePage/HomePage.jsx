@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import ButtonNuv from '../../shared/Button/ButtonNuv';
+import ButtonNuv from '../../components/Button/ButtonNuv';
 
 import style from './home-page.module.scss';
 

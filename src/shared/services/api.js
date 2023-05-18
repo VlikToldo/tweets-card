@@ -18,6 +18,5 @@ export const getUsers = async (page = 1) => {
 
 export const updateFollowers = async user => {
   const {data}  = await instance.put(`/${user.id}`, user);
-  console.log(data);
   return data;
 };

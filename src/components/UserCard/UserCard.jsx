@@ -1,8 +1,9 @@
 import { ReactComponent as Logo } from './images/logo.svg';
 import PropTypes from 'prop-types';
 
-import Button from '../../shared/Button/Button';
+import Button from '../Button/Button';
 
+import boyImg from './images/boy.png';
 import style from './user-card.module.scss';
 
 const UserCard = ({followers, tweets, subscription, id, addFollower, removeFollower}) => {
@@ -27,20 +28,18 @@ const UserCard = ({followers, tweets, subscription, id, addFollower, removeFollo
     <li className={style.tweetsCard}>
       <div className={style.imgBox}>
         <Logo className={style.logo} />
-        <img
-          className={style.logoImg}
-          src={process.env.PUBLIC_URL + '/images/logo-1x.png'}
-          alt="logo"
-        ></img>
+      </div>
+      <div className={style.avatar}>
+        <img className={style.avatarImg}
+            src={boyImg}
+            alt="logo"
+          />
       </div>
       <div className={style.tweetsBox}>
         <div className={style.tweetsBoxQuantity}>
-          <p className={style.tweetsQuantity}>Tweets {tweets}</p>
-          <p className={style.tweetsQuantity}>
-            followers {formattedNumber(followers)}
-          </p>
+          <p className={style.tweetsQuantity}>{tweets} Tweets</p>
+          <p className={style.tweetsQuantity}>{formattedNumber(followers)} followers</p>
         </div>
-
         <Button key={id} onClick={handleClick} subscription={subscription}>
           {(subscription && 'following') || (!subscription && 'follow')}
         </Button>
